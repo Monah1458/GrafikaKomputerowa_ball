@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             Rigidbody rb = player.GetComponent<Rigidbody>();
-            if (rb != null) rb.isKinematic = true; // Freezes the ball
+            if (rb != null) rb.isKinematic = true;
         }
     }
 

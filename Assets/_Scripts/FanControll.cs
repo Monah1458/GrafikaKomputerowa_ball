@@ -14,13 +14,7 @@ public class FanControll : MonoBehaviour
     [Tooltip("Which layers should be affected by the wind.")]
     public LayerMask affectedLayers = ~0; // default: all layers
 
-    [Header("Fan Visuals (optional)")]
-    [Tooltip("The spinning blade Transform. Will rotate around its local up axis.")]
-    public Transform fanBlades;
-    public float bladeSpinSpeed = 720f; // degrees per second
 
-    [Tooltip("Optional particle system for visible wind.")]
-    public ParticleSystem windParticles;
 
     [Header("Player Detection")]
     [Tooltip("The tag your player ball uses. Leave as 'Player' by default.")]
@@ -36,8 +30,7 @@ public class FanControll : MonoBehaviour
 
     void Update()
     {
-        if (fanBlades != null)
-            fanBlades.Rotate(Vector3.up, bladeSpinSpeed * Time.deltaTime, Space.Self);
+        
 
     }
 
@@ -58,16 +51,13 @@ public class FanControll : MonoBehaviour
         Vector3 force = Vector3.up * (maxForce * strengthCurve) * rb.mass;
         rb.AddForce(force, ForceMode.Force);
 
-        if (windParticles != null && !windParticles.isPlaying)
-            windParticles.Play();
+
     }
 
     void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag(playerTag)) return;
 
-        if (windParticles != null && windParticles.isPlaying)
-            windParticles.Stop();
     }
 
     void OnDrawGizmosSelected()
